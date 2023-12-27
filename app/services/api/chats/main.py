@@ -1,6 +1,7 @@
-from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
-from langchain.prompts import ( SystemMessagePromptTemplate, HumanMessagePromptTemplate)
-from langchain.output_parsers import ResponseSchema, PydanticOutputParser
+from ....openai.prompts.system import system
+from ....openai.prompts.human import human
+from langchain.prompts import ChatPromptTemplate
+from langchain.output_parsers import PydanticOutputParser
 from langchain.pydantic_v1 import BaseModel, Field 
 from ....templates.main import general_knowledge_system_template
 from ....openai.openai_model import model
@@ -16,13 +17,11 @@ class ChatService():
 
 			pydantic_parser = PydanticOutputParser(pydantic_object=ChatQuery)
 
-			human_prompt = HumanMessagePromptTemplate.from_template(question_template_text)
+			human_prompt = human.get_human_prompt(question_template_text)
 
-			system_prompt = SystemMessagePromptTemplate.from_template(general_knowledge_system_template)
+			system_prompt = system.get_system_prompt(general_knowledge_system_template)
 
-			chat_prompt = ChatPromptTemplate.from_messages(
-				[human_prompt, system_prompt]
-			)
+			chat_prompt = ChatPromptTemplate.from_messages([system_prompt, human_prompt])
 
 			model_request = chat_prompt.format_prompt(
 				request=question,
