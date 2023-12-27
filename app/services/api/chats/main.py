@@ -1,7 +1,7 @@
 from ....openai.prompts.system import system
 from ....openai.prompts.human import human
 from langchain.prompts import ChatPromptTemplate
-from langchain.output_parsers import PydanticOutputParser
+from ....pydantic.main import pydantic_parsers
 from langchain.pydantic_v1 import BaseModel, Field 
 from ....templates.main import general_knowledge_system_template
 from ....openai.openai_model import model
@@ -15,7 +15,7 @@ class ChatService():
 	def get_ai_generated_answer(self, question: str):
 			question_template_text = "{request}/n{format_instructions}"
 
-			pydantic_parser = PydanticOutputParser(pydantic_object=ChatQuery)
+			pydantic_parser = pydantic_parsers.get_pydantic_output_parser(pydantic_object=ChatQuery)
 
 			human_prompt = human.get_human_prompt(question_template_text)
 

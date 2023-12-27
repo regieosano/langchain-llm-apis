@@ -2,7 +2,7 @@ from ....openai.openai_model import model
 from langchain.prompts import ChatPromptTemplate
 from ....openai.prompts.system import system
 from ....openai.prompts.human import human
-from langchain.output_parsers import PydanticOutputParser
+from ....pydantic.main import pydantic_parsers
 from ....templates.main import joke_template
 from langchain.pydantic_v1 import BaseModel, Field 
 
@@ -14,7 +14,7 @@ class JokeService():
 	def get_ai_generated_joke(self, subject):
 		template_text = "{request}/n{format_instructions}"
 
-		pydantic_parser = PydanticOutputParser(pydantic_object=JokeElicited)
+		pydantic_parser = pydantic_parsers.get_pydantic_output_parser(pydantic_object=JokeElicited)
 
 		human_prompt = human.get_human_prompt(template_text)
 
