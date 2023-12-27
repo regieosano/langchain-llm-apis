@@ -13,20 +13,17 @@ supabase: Client = create_client(supabase_url, supabase_key)
 embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 vector_store = SupabaseVectorStore(
-	embedding=embeddings,
-	client=supabase,
-	table_name="lincoln_speech",
-	query_name="match_lincoln",
+    embedding=embeddings,
+    client=supabase,
+    table_name="lincoln_speech",
+    query_name="match_lincoln",
 )
 
+
 class VectorDBService(BaseModel):
+    def get_vector_db_response(self, data: object):
+        retriever = vector_store.as_retriever()
 
-	def get_vector_db_response(self, data: object):
-		
-		retriever = vector_store.as_retriever()
+        results = retriever.get_relevant_documents(data.question)
 
-		results = retriever.get_relevant_documents(data.question)
-
-		return results[0].page_content
-
-
+        return results[0].page_content
