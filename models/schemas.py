@@ -6,3 +6,10 @@ class PostChat(BaseModel):
 
 class PostChatResponse(BaseModel):
  	 answer: str
+		
+
+class PostVector(BaseModel):
+	 question: str
+
+
+

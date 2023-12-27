@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import chat
+from .routers import chat, vector
 from .services.api.chats.main import ChatService
 
 app = FastAPI()
@@ -13,5 +13,6 @@ def favicon():
     return {"message": "Regie's Favicon!"}
 
 
-app.include_router(chat.router)
+app.include_router(chat.post_router)
+app.include_router(vector.post_router)
 
