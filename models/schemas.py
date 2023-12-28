@@ -11,6 +11,8 @@ class PostChatResponse(BaseModel):
 class PostVector(BaseModel):
 	 question: str
 
+class PostVectorStore(BaseModel):
+	 data: str	 
 
 class PostJoke(BaseModel):
    subject: str
