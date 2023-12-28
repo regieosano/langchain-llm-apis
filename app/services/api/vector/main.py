@@ -20,10 +20,3 @@ vector_store = SupabaseVectorStore(
 )
 
 
-class VectorDBService(BaseModel):
-    def get_vector_db_response(self, data: object):
-        retriever = vector_store.as_retriever()
-
-        results = retriever.get_relevant_documents(data.question)
-
-        return results[0].page_content

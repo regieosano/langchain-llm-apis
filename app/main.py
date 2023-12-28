@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .routers import chat, vector, joke
-from .services.api.chats.main import ChatService
+
 
 app = FastAPI()
 
