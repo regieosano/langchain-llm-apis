@@ -1,4 +1,3 @@
-import json
 from fastapi import HTTPException, status
 from app.routers.route.router import post_router
 from config.vector.main import vector_store

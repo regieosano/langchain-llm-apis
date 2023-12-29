@@ -1,12 +1,14 @@
 from fastapi import FastAPI
-from .routers import chat, vector, joke
+from .routers import chat, vector, joke, mathagent
 
 
 app = FastAPI()
 
+
 @app.get("/")
 def root():
     return {"message": "Welcome to Lang Chain APIs!"}
+
 
 @app.get("/favicon.ico")
 def favicon():
@@ -16,4 +18,4 @@ def favicon():
 app.include_router(chat.post_router)
 app.include_router(vector.post_router)
 app.include_router(joke.post_router)
-
+app.include_router(mathagent.post_router)

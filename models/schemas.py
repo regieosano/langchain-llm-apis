@@ -19,6 +19,10 @@ class PostJoke(BaseModel):
 
 
 class PostJokeResponse(BaseModel):
-	 joke: str	 
+	 joke: str
+
+
+class PostMath(BaseModel):
+	 query: str
 
 

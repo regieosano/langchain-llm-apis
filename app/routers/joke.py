@@ -6,12 +6,15 @@ from models.schemas import PostJoke, PostJokeResponse
 
 joke_service = JokeService()
 
-@post_router.post("/joke", status_code=status.HTTP_200_OK, response_model=PostJokeResponse)
+
+@post_router.post(
+    "/joke", status_code=status.HTTP_200_OK, response_model=PostJokeResponse
+)
 def joke_llm_elicit(post_joke_elicit: PostJoke):
-	try:
-		result = joke_service.get_ai_generated_joke(post_joke_elicit.subject)
-		
-		json_data = json.loads(result.content)
-		return json_data
-	except Exception as e:
-		raise HTTPException(status_code=500, detail=str(e))
+    try:
+        result = joke_service.get_ai_generated_joke(post_joke_elicit.subject)
+
+        json_data = json.loads(result.content)
+        return json_data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
